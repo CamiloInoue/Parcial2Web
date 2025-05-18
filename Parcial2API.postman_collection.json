@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "9b4121fc-28ad-4a7c-9443-9d00a56132b1",
+		"name": "Parcial2API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33301479",
+		"_collection_link": "https://grey-space-423794.postman.co/workspace/Parcial2~0d662534-8753-4ac0-af40-55913dc31ec6/collection/33301479-9b4121fc-28ad-4a7c-9443-9d00a56132b1?action=share&source=collection_link&creator=33301479"
+	},
+	"item": [
+		{
+			"name": "Add a Actividad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"titulo\": \"Preparacion\",\r\n   \"fecha\": \"2024-06-01\",\r\n   \"cupoMax\": \"20\",\r\n   \"image\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/actividades",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"actividades"
+					]
+				},
+				"description": "# Actividades Endpoint\n\nThis endpoint allows you to create new activities by making an HTTP POST request to {{baseURL}}/actividades.\n\n## Request Body\n\nThe request should include the following parameters in the raw request body:\n\n- `titulo`: The title of the activity (string)\n    \n- `fecha`: The date of the activity (string in the format \"YYYY-MM-DD\")\n    \n- `cupoMax`: The maximum capacity for the activity (integer)\n    \n- `image`: The URL of the image for the activity (string)\n    \n\n## Response\n\nUpon successful creation of the activity, the response will include the following fields:\n\n- `id`: The unique identifier for the created activity (string)\n    \n- `titulo`: The title of the activity (string)\n    \n- `fecha`: The date of the activity (string)\n    \n- `cupoMax`: The maximum capacity for the activity (integer)\n    \n- `estado`: The status of the activity (integer)\n    \n\nIn case of a failed request, the response will provide an appropriate error message.\n\nExample Response:\n\n``` json\n{\n  \"id\": \"sampleId\",\n  \"titulo\": \"sampleTitle\",\n  \"fecha\": \"2024-06-01\",\n  \"cupoMax\": 20,\n  \"estado\": 1\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Add a Actividad",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"titulo\": \"Preparacion\",\r\n   \"fecha\": \"2024-06-01\",\r\n   \"cupoMax\": \"20\",\r\n   \"image\": \"https://www.si.edu/sites/default/files/newsdesk/fact_sheets/nhb2015-02891.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/actividades",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"actividades"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"1\",\n    \"titulo\": \"Nombre de la actividad\",\n    \"fecha\": \"2024-06-01\",\n    \"cupoMax\": 20,\n    \"estado\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Cambiar Estado Actividad",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"estado\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/actividades/:id/estado/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"actividades",
+						":id",
+						"estado",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Cambiar Estado Actividad",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"estado\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/actividades/:id/estado/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"actividades",
+								":id",
+								"estado",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"id\": \"uuid-generado\",\r\n  \"titulo\": \"Taller de programación avanzada\",\r\n  \"fecha\": \"2025-05-20\",\r\n  \"cupoMax\": 30,\r\n  \"estado\": 1,\r\n  \"resenas\": [],\r\n  \"estudiantes\": [ /* ... */ ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Actividad by fecha",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/actividades/fecha/:fecha",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"actividades",
+						"fecha",
+						":fecha"
+					],
+					"variable": [
+						{
+							"key": "fecha",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Actividad by fecha",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/actividades/fecha/:fecha",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"actividades",
+								"fecha",
+								":fecha"
+							],
+							"variable": [
+								{
+									"key": "fecha",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "[\r\n  {\r\n    \"id\": \"uuid-generado\",\r\n    \"titulo\": \"Taller de programación avanzada\",\r\n    \"fecha\": \"2025-05-20\",\r\n    \"cupoMax\": 30,\r\n    \"estado\": 0,\r\n    \"resenas\": [],\r\n    \"estudiantes\": []\r\n  }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Add a Estudiante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"correo\": \"juan.perez@uni.edu.co\",\r\n  \"semestre\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/estudiantes",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"estudiantes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Estudiante",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"correo\": \"juan.perez@uni.edu.co\",\r\n  \"semestre\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/estudiantes",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"id\": \"uuid-generado\",\r\n  \"correo\": \"juan.perez@uni.edu.co\",\r\n  \"semestre\": 5,\r\n  \"actividades\": [],\r\n  \"resenas\": []\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Estudiante by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/estudiantes/:id",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"estudiantes",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"description": "Busca y devuelve un estudiante por su ID"
+			},
+			"response": [
+				{
+					"name": "Get Estudiante by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/estudiantes/:id",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estudiantes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"id\": \"uuid-generado\",\r\n  \"correo\": \"juan.perez@uni.edu.co\",\r\n  \"semestre\": 5,\r\n  \"actividades\": [ /* ... */ ],\r\n  \"resenas\": [ /* ... */ ]\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Inscribir Estudiante a Actividad",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/estudiantes/:id/inscribir/:actividadId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"estudiantes",
+						":id",
+						"inscribir",
+						":actividadId"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						},
+						{
+							"key": "actividadId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Inscribir Estudiante a Actividad",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/estudiantes/:id/inscribir/:actividadId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"estudiantes",
+								":id",
+								"inscribir",
+								":actividadId"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								},
+								{
+									"key": "actividadId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Add a Reseña",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comentario\": \"Excelente actividad, aprendí mucho.\",\r\n  \"calificacion\": 5,\r\n  \"actividad\": { \"id\": \"uuid-actividad\" },\r\n  \"estudiante\": { \"id\": \"uuid-estudiante\" }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/resenas",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"resenas"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Reseña",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"comentario\": \"Excelente actividad, aprendí mucho.\",\r\n  \"calificacion\": 5,\r\n  \"actividad\": { \"id\": \"uuid-actividad\" },\r\n  \"estudiante\": { \"id\": \"uuid-estudiante\" }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/resenas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"resenas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"id\": \"uuid-generado\",\r\n  \"comentario\": \"Excelente actividad, aprendí mucho.\",\r\n  \"calificacion\": 5,\r\n  \"actividad\": { \"id\": \"uuid-actividad\" },\r\n  \"estudiante\": { \"id\": \"uuid-estudiante\" }\r\n}"
+				}
+			]
+		}
+	]
+}
