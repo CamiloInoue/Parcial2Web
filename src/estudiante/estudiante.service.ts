@@ -6,12 +6,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EstudianteEntity } from './estudiante.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
+import { ActividadEntity } from 'src/actividad/actividad.entity';
 
 @Injectable()
 export class EstudianteService {
      constructor(
        @InjectRepository(EstudianteEntity)
-       private readonly estudianteRepository: Repository<EstudianteEntity>
+       private readonly estudianteRepository: Repository<EstudianteEntity>,
+       @InjectRepository(ActividadEntity)
+        private readonly actividadRepository: Repository<ActividadEntity>,
    ){}
 
     async crearEstudiante(estudiante: EstudianteEntity): Promise<EstudianteEntity> {
@@ -39,5 +42,37 @@ export class EstudianteService {
        return estudiante;
    }
 
-   
+ 
+   async inscribirseActividad(estudianteID: string, actividadID: string): Promise<void> {
+        const estudiante = await this.estudianteRepository.findOne({
+            where: { id: estudianteID },
+            relations: ['actividades'],
+        });
+        if (!estudiante) {
+            throw new BusinessLogicException('Estudiante no encontrado', BusinessError.NOT_FOUND);
+        }
+
+        const actividad = await this.actividadRepository.findOne({
+            where: { id: actividadID },
+            relations: ['estudiantes'],
+        });
+        if (!actividad) {
+            throw new BusinessLogicException('Actividad no encontrada', BusinessError.NOT_FOUND);
+        }
+
+        if (actividad.estado !== 0) {
+            throw new BusinessLogicException('La actividad no está disponible para inscripción', BusinessError.PRECONDITION_FAILED);
+        }
+
+        if (actividad.estudiantes.length >= actividad.cupoMax) {
+            throw new BusinessLogicException('No hay cupo disponible en la actividad', BusinessError.PRECONDITION_FAILED);
+        }
+
+        if (actividad.estudiantes.some(e => e.id === estudianteID)) {
+            throw new BusinessLogicException('El estudiante ya está inscrito en la actividad', BusinessError.PRECONDITION_FAILED);
+        }
+
+        actividad.estudiantes.push(estudiante);
+        await this.actividadRepository.save(actividad);
+    }
 }
